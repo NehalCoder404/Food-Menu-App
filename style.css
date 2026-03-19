@@ -44,6 +44,7 @@ nav{
     height: 60%;
     padding-left: 15px;
     font-size: 18px;
+    border: 1px solid rgb(175, 162, 162);
 }
 
 
@@ -51,9 +52,11 @@ nav{
     outline: none;
 }
 
-.serachBox button{
+.serachBox button , .btn{
     border: none;
     padding: 8px 13px;
+    background-color: #FF9000;
+    color: white;
     border-radius: 25px;
     font-size: 18px;
 }
