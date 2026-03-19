@@ -60,3 +60,38 @@ nav{
     border-radius: 25px;
     font-size: 18px;
 }
+
+.contanir{
+    height: calc(100vh - 70px);
+    display: flex;
+}
+
+.sildbar{
+    flex: 1;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    padding: 20px;
+    height: 100%;
+    overflow: auto;
+}
+
+.items{
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+}
+.items img{
+    height: 50px;
+    width: 50px;
+}
+
+.productInfo{
+}
+
+.main{
+    flex: 2;
+    height: 100%;
+}
+
