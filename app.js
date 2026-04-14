@@ -4,13 +4,13 @@ let apiCell = 'https://forkify-api.jonas.io/api/v2/recipes?search=pizza'
 let sildbar = document.querySelector('.sildbar')
 let btn = document.getElementById('s-btn')
 let serach = document.getElementById('serach')
+let main = document.querySelector('.main')
 
 // console.log(sildbar);
 
 
 function itemsFn(elment) {
-
-    return `<div class="items">
+    return `<div class="items" data-id=${elment.id} >
         <img src='${elment.image_url}'alt="">
             <div class="productInfo">
                 <h3>${elment.title}</h3>
@@ -57,26 +57,57 @@ async function startapp() {
 async function serachHandler() {
     let serachvalue = serach.value
     // console.log(serachvalue);
-    
+
     let apiRes = await fetch(`https://forkify-api.jonas.io/api/v2/recipes?search=${serachvalue}`)
     // console.log(apiRes);
     let result = await apiRes.json()
     // console.log(result);
 
-    let {data:{recipes}} = result
+    let { data: { recipes } } = result
 
     console.log(recipes);
-    
-    let allHtmlUi = recipes.map((recipe)=> itemsFn(recipe) )
-    // console.log(allHtmlUi);
-    
+
+    let allHtmlUi = recipes.map((recipe) => itemsFn(recipe))
+    console.log(allHtmlUi);
+
     sildbar.innerHTML = allHtmlUi
-    
+
 }
 
+let fn = async (elment) => {
+    // console.log('ma chal ra hun',);
+    let id = elment.dataset.id
 
+    // console.log(id);
+
+    let apiRes = await fetch(`https://forkify-api.jonas.io/api/v2/recipes/${id}`)
+
+    let result = await apiRes.json()
+
+    // console.log(result);
+
+    let { data: { recipe } } = result
+
+    console.log(recipe);
+
+    main.innerHTML = `
+            <img src="${recipe.image_url}" alt="">
+            <h3>Title ${recipe.title}</h3>
+            <h3>Serving ${recipe.servings}</h3>
+            <h3>Cooking Time ${recipe.cooking_time}</h3>
+        </div>`
+}
 
 
 startapp()
 
+document.addEventListener('click', (e) => {
+    // console.log(e.target);
+
+    if (e.target.classList.contains('items')) {
+        // console.log('items',e.target);
+        fn(e.target)
+
+    }
+})
 btn.addEventListener('click', serachHandler)
